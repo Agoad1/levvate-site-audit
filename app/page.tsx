@@ -10,7 +10,7 @@ export default function Home() {
   const [auditData, setAuditData] = useState<any>(null);
   const [error, setError] = useState("");
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     setError("");
@@ -31,7 +31,7 @@ export default function Home() {
       });
 
       if (!response.ok) {
-        throw new Error("Failed to fetch audit data.");
+        throw new Error(`Audit failed (${response.status}). Check that your n8n credentials are configured and try again.`);
       }
 
       const data = await response.json();
